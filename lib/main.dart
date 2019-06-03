@@ -8,7 +8,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.pink,
+        accentColor: Colors.indigo,
+        fontFamily: "Montserrat"
       ),
       home: HomePage(),
     );
@@ -27,6 +29,11 @@ class HomePage extends StatelessWidget {
           children: <Widget>[],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.camera),
+        onPressed: (){},
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
     );
   }
 }
