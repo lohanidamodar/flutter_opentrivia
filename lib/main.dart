@@ -12,7 +12,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.pink,
         accentColor: Colors.indigo,
-        fontFamily: "Montserrat"
+        fontFamily: "Montserrat",
+        buttonColor: Colors.pink,
+        buttonTheme: ButtonThemeData(
+          buttonColor: Colors.pink,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          textTheme: ButtonTextTheme.primary
+        )
       ),
       home: HomePage(),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:opentrivia/models/category.dart';
+import 'package:opentrivia/ui/widgets/quiz_options.dart';
 
 class HomePage extends StatelessWidget {
   final List<Color> tileColors = [
@@ -57,9 +58,7 @@ class HomePage extends StatelessWidget {
     return MaterialButton(
       elevation: 1.0,
       highlightElevation: 1.0,
-      onPressed: (){
-        print(category.id.toString());
-      },
+      onPressed: () => _categoryPressed(context,category),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
@@ -76,5 +75,18 @@ class HomePage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  _categoryPressed(BuildContext context,Category category) {
+    showModalBottomSheet(
+      context: context,
+      builder: (sheetContext) => BottomSheet(
+        builder: (_) => QuizOptionsDialog(category: category,),
+        onClosing: (){},
+
+      ),
+      
+    );
+
   }
 }
