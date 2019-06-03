@@ -6,7 +6,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'Open Trivia',
       theme: ThemeData(
         primarySwatch: Colors.pink,
         accentColor: Colors.indigo,
@@ -28,12 +29,7 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: <Widget>[],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.camera),
-        onPressed: (){},
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+      )
     );
   }
 }
