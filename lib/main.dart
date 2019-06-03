@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:opentrivia/ui/pages/home.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,22 +15,6 @@ class MyApp extends StatelessWidget {
         fontFamily: "Montserrat"
       ),
       home: HomePage(),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context){
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Home'),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[],
-        ),
-      )
     );
   }
 }
