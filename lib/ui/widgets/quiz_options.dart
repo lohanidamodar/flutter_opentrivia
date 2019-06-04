@@ -16,12 +16,14 @@ class QuizOptionsDialog extends StatefulWidget {
 class _QuizOptionsDialogState extends State<QuizOptionsDialog> {
   int _noOfQuestions;
   String _difficulty;
+  bool processing;
 
   @override
   void initState() { 
     super.initState();
     _noOfQuestions = 10;
     _difficulty = "easy";
+    processing = false;
   }
 
   @override
@@ -114,7 +116,7 @@ class _QuizOptionsDialogState extends State<QuizOptionsDialog> {
               ),
             ),
             SizedBox(height: 20.0),
-            RaisedButton(
+            processing ? CircularProgressIndicator() : RaisedButton(
               child: Text("Start Quiz"),
               onPressed: _startQuiz,
             ),
@@ -137,6 +139,9 @@ class _QuizOptionsDialogState extends State<QuizOptionsDialog> {
   }
 
   void _startQuiz() async {
+    setState(() {
+      processing=true;
+    });
     try {
       List<Question> questions =  await getQuestions(widget.category, _noOfQuestions, _difficulty);
       Navigator.pop(context);
@@ -152,5 +157,8 @@ class _QuizOptionsDialogState extends State<QuizOptionsDialog> {
     }catch(e){
       print(e.message);
     }
+    setState(() {
+      processing=false;
+    });
   }
 }
