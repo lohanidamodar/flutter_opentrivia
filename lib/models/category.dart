@@ -18,8 +18,8 @@ final List<Category> categories = [
   Category(15,"Video Games", icon: FontAwesomeIcons.gamepad),
   Category(16,"Board Games", icon: FontAwesomeIcons.chessBoard),
   Category(17,"Science & Nature", icon: FontAwesomeIcons.microscope),
-  Category(18,"Computers", icon: FontAwesomeIcons.laptopCode),
-  Category(19,"Mathematics", icon: FontAwesomeIcons.sortNumericDown),
+  Category(18,"Computer", icon: FontAwesomeIcons.laptopCode),
+  Category(19,"Maths", icon: FontAwesomeIcons.sortNumericDown),
   Category(20,"Mythology"),
   Category(21,"Sports", icon: FontAwesomeIcons.footballBall),
   Category(22,"Geography", icon: FontAwesomeIcons.mountain),
@@ -32,5 +32,5 @@ final List<Category> categories = [
   Category(29,"Comics"),
   Category(30,"Gadgets", icon: FontAwesomeIcons.mobileAlt),
   Category(31,"Japanese Anime & Manga"),
-  Category(32,"Cartoon & Animations"),
+  Category(32,"Cartoon & Animation"),
 ];
