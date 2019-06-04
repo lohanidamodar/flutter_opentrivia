@@ -168,6 +168,9 @@ class _QuizOptionsDialogState extends State<QuizOptionsDialog> {
       ));
     } catch(e){
       print(e.message);
+      Navigator.pushReplacement(context, MaterialPageRoute(
+        builder: (_) => ErrorPage(message: "Unexpected error trying to connect to the API",)
+      ));
     }
     setState(() {
       processing=false;
