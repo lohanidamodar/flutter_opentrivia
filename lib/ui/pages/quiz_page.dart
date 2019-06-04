@@ -80,7 +80,7 @@ class _QuizPageState extends State<QuizPage> {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         ...options.map((option)=>RadioListTile(
-                          title: Text("$option"),
+                          title: Text(HtmlUnescape().convert("$option")),
                           groupValue: _answers[_currentIndex],
                           value: option,
                           onChanged: (value){
