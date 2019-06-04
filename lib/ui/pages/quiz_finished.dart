@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:opentrivia/models/question.dart';
+import 'package:opentrivia/ui/pages/check_answers.dart';
 
 class QuizFinishedPage extends StatelessWidget {
   final List<Question> questions;
@@ -113,7 +114,11 @@ class QuizFinishedPage extends StatelessWidget {
                     ),
                     color: Theme.of(context).primaryColor,
                     child: Text("Check Answers"),
-                    onPressed: (){},
+                    onPressed: (){
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (_) => CheckAnswersPage(questions: questions, answers: answers,)
+                      ));
+                    },
                   ),
                 ],
               )
