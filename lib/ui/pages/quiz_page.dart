@@ -3,6 +3,7 @@ import 'package:opentrivia/models/category.dart';
 import 'package:opentrivia/models/question.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:opentrivia/ui/pages/quiz_finished.dart';
+import 'package:html_unescape/html_unescape.dart';
 
 class QuizPage extends StatefulWidget {
   final List<Question> questions;
@@ -66,7 +67,7 @@ class _QuizPageState extends State<QuizPage> {
                       ),
                       SizedBox(width: 16.0),
                       Expanded(
-                        child: Text(widget.questions[_currentIndex].question,
+                        child: Text(HtmlUnescape().convert(widget.questions[_currentIndex].question),
                           softWrap: true,
                           style: _questionStyle,),
                       ),
