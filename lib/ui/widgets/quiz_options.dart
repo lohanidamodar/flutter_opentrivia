@@ -1,7 +1,9 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:opentrivia/models/category.dart';
 import 'package:opentrivia/models/question.dart';
 import 'package:opentrivia/resources/api_provider.dart';
+import 'package:opentrivia/ui/pages/error.dart';
 import 'package:opentrivia/ui/pages/quiz_page.dart';
 
 class QuizOptionsDialog extends StatefulWidget {
@@ -147,14 +149,18 @@ class _QuizOptionsDialogState extends State<QuizOptionsDialog> {
       Navigator.pop(context);
       if(questions.length < 1) {
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (_) => Container(child: Text("No questions in the category"),)
+          builder: (_) => ErrorPage(message: "There are not enough questions in the category, with the options you selected.",)
         ));
         return;
       }
       Navigator.push(context, MaterialPageRoute(
         builder: (_) => QuizPage(questions: questions, category: widget.category,)
       ));
-    }catch(e){
+    }on SocketException catch (_) {
+      Navigator.pushReplacement(context, MaterialPageRoute(
+        builder: (_) => ErrorPage(message: "Can't reach the servers, \n Please check your internet connection.",)
+      ));
+    } catch(e){
       print(e.message);
     }
     setState(() {
