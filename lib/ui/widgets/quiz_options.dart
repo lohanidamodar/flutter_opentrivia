@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:opentrivia/models/category.dart';
+import 'package:opentrivia/models/question.dart';
+import 'package:opentrivia/resources/api_provider.dart';
+import 'package:opentrivia/ui/pages/quiz_page.dart';
 
 class QuizOptionsDialog extends StatefulWidget {
   final Category category;
@@ -113,9 +116,7 @@ class _QuizOptionsDialogState extends State<QuizOptionsDialog> {
             SizedBox(height: 20.0),
             RaisedButton(
               child: Text("Start Quiz"),
-              onPressed: (){
-                print("start quiz");
-              },
+              onPressed: _startQuiz,
             ),
             SizedBox(height: 20.0),
           ],
@@ -133,5 +134,23 @@ class _QuizOptionsDialogState extends State<QuizOptionsDialog> {
     setState(() {
       _difficulty=s;
     });
+  }
+
+  void _startQuiz() async {
+    try {
+      List<Question> questions =  await getQuestions(widget.category, _noOfQuestions, _difficulty);
+      Navigator.pop(context);
+      if(questions.length < 1) {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (_) => Container(child: Text("No questions in the category"),)
+        ));
+        return;
+      }
+      Navigator.push(context, MaterialPageRoute(
+        builder: (_) => QuizPage(questions: questions, category: widget.category,)
+      ));
+    }catch(e){
+      print(e.message);
+    }
   }
 }
