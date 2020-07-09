@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Flutter Open Trivia
+Comment=Trivia app using OpenTDb API
+Icon=${SNAP}/meta/gui/icon.png
+Exec=opentrivia %U
+Terminal=false
+Type=Application
+Categories=Games;
+Keywords=Trivia,Quiz,Game;
+StartupNotify=false

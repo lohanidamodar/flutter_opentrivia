@@ -1,0 +1,26 @@
+name: opentrivia
+adopt-info: opentrivia
+summary: Flutter Opentrivia
+description: Test your knowledge in various subjects
+confinement: strict
+base: core18
+grade: stable
+architectures:
+  - build-on: amd64
+
+apps:
+  opentrivia:
+    command: opentrivia
+    extensions: [flutter-master]
+    plugs:
+      - network
+
+parts:
+  opentrivia:
+    source: .
+    plugin: flutter
+    flutter-target: lib/main.dart # The main entry-point file of the application
+    build-snaps: [ yq ]
+    override-build: |
+      snapcraftctl build
+      snapcraftctl set-version "$(yq r pubspec.yaml version)"

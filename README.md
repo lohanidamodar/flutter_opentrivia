@@ -1,7 +1,8 @@
 # OpenTrivia
 A quiz app in flutter using the [open trivia api](https://opentdb.com)
 
-[Deployed in Github](https://lohanidamodar.github.io/flutter_opentrivia/#/)
+- [Deployed in Github](https://lohanidamodar.github.io/flutter_opentrivia/#/)
+- [Install in Linux](https://snapcraft.io/opentrivia)
 
 ## Libraries used
 - [Font Awesome Flutter](https://pub.dev/packages/font_awesome_flutter)
