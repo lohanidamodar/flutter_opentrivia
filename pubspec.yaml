@@ -1,7 +1,7 @@
 name: opentrivia
 description: A new Flutter project.
 
-version: 1.0.1+1
+version: 1.0.2+1
 
 environment:
   sdk: ">=2.2.2 <3.0.0"
