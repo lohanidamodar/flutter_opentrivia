@@ -19,12 +19,12 @@ class ErrorPage extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Theme.of(context).primaryColor,
-              Theme.of(context).accentColor
+            Theme.of(context).primaryColor,
+            Theme.of(context).accentColor,
             ],
             begin: Alignment.topCenter,
-            end: Alignment.bottomCenter
-          )
+            end: Alignment.bottomCenter,
+          ),
         ),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
