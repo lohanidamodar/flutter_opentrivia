@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ErrorPage extends StatelessWidget {
   final String message;
 
-  const ErrorPage({Key key, this.message = "There was an unknown error." }) : super(key: key);
+  const ErrorPage({Key? key, this.message = "There was an unknown error." }) : super(key: key);
 
 
   @override
@@ -20,7 +20,7 @@ class ErrorPage extends StatelessWidget {
           gradient: LinearGradient(
             colors: [
             Theme.of(context).primaryColor,
-            Theme.of(context).accentColor,
+            Theme.of(context).colorScheme.secondary,
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -41,7 +41,7 @@ class ErrorPage extends StatelessWidget {
                       color: Colors.red
                     ),),
                     SizedBox(height: 20.0),
-                    RaisedButton(
+                    ElevatedButton(
                       child: Text("Try Again"),
                       onPressed: ()=> Navigator.pop(context),
                     )

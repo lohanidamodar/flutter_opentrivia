@@ -7,9 +7,9 @@ import 'package:html_unescape/html_unescape.dart';
 
 class QuizPage extends StatefulWidget {
   final List<Question> questions;
-  final Category category;
+  final Category? category;
 
-  const QuizPage({Key key, @required this.questions, this.category})
+  const QuizPage({Key? key, required this.questions, this.category})
       : super(key: key);
 
   @override
@@ -27,7 +27,7 @@ class _QuizPageState extends State<QuizPage> {
   @override
   Widget build(BuildContext context) {
     Question question = widget.questions[_currentIndex];
-    final List<dynamic> options = question.incorrectAnswers;
+    final List<dynamic> options = question.incorrectAnswers!;
     if (!options.contains(question.correctAnswer)) {
       options.add(question.correctAnswer);
       options.shuffle();
@@ -38,7 +38,7 @@ class _QuizPageState extends State<QuizPage> {
       child: Scaffold(
         key: _key,
         appBar: AppBar(
-          title: Text(widget.category.name),
+          title: Text(widget.category!.name),
           elevation: 0,
         ),
         body: Stack(
@@ -65,7 +65,7 @@ class _QuizPageState extends State<QuizPage> {
                       Expanded(
                         child: Text(
                           HtmlUnescape().convert(
-                              widget.questions[_currentIndex].question),
+                              widget.questions[_currentIndex].question!),
                           softWrap: true,
                           style: MediaQuery.of(context).size.width > 800
                               ? _questionStyle.copyWith(fontSize: 30.0)
@@ -80,14 +80,15 @@ class _QuizPageState extends State<QuizPage> {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         ...options.map((option) => RadioListTile(
-
-                              title: Text(HtmlUnescape().convert("$option"),style: MediaQuery.of(context).size.width > 800
-                              ? TextStyle(
-                                fontSize: 30.0
-                              ) : null,),
+                              title: Text(
+                                HtmlUnescape().convert("$option"),
+                                style: MediaQuery.of(context).size.width > 800
+                                    ? TextStyle(fontSize: 30.0)
+                                    : null,
+                              ),
                               groupValue: _answers[_currentIndex],
                               value: option,
-                              onChanged: (value) {
+                              onChanged: (dynamic value) {
                                 setState(() {
                                   _answers[_currentIndex] = option;
                                 });
@@ -99,14 +100,21 @@ class _QuizPageState extends State<QuizPage> {
                   Expanded(
                     child: Container(
                       alignment: Alignment.bottomCenter,
-                      child: RaisedButton(
-                        padding: MediaQuery.of(context).size.width > 800
-                              ? const EdgeInsets.symmetric(vertical: 20.0,horizontal: 64.0) : null,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          padding: MediaQuery.of(context).size.width > 800
+                              ? const EdgeInsets.symmetric(
+                                  vertical: 20.0, horizontal: 64.0)
+                              : null,
+                        ),
                         child: Text(
-                            _currentIndex == (widget.questions.length - 1)
-                                ? "Submit"
-                                : "Next", style: MediaQuery.of(context).size.width > 800
-                              ? TextStyle(fontSize: 30.0) : null,),
+                          _currentIndex == (widget.questions.length - 1)
+                              ? "Submit"
+                              : "Next",
+                          style: MediaQuery.of(context).size.width > 800
+                              ? TextStyle(fontSize: 30.0)
+                              : null,
+                        ),
                         onPressed: _nextSubmit,
                       ),
                     ),
@@ -122,7 +130,7 @@ class _QuizPageState extends State<QuizPage> {
 
   void _nextSubmit() {
     if (_answers[_currentIndex] == null) {
-      _key.currentState.showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("You must select an answer to continue."),
       ));
       return;
@@ -139,7 +147,7 @@ class _QuizPageState extends State<QuizPage> {
   }
 
   Future<bool> _onWillPop() async {
-    return showDialog<bool>(
+    final resp = await showDialog<bool>(
         context: context,
         builder: (_) {
           return AlertDialog(
@@ -147,13 +155,13 @@ class _QuizPageState extends State<QuizPage> {
                 "Are you sure you want to quit the quiz? All your progress will be lost."),
             title: Text("Warning!"),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                 child: Text("Yes"),
                 onPressed: () {
                   Navigator.pop(context, true);
                 },
               ),
-              FlatButton(
+              TextButton(
                 child: Text("No"),
                 onPressed: () {
                   Navigator.pop(context, false);
@@ -162,5 +170,6 @@ class _QuizPageState extends State<QuizPage> {
             ],
           );
         });
+    return resp ?? false;
   }
 }

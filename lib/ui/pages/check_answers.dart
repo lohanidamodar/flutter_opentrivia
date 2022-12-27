@@ -7,7 +7,7 @@ class CheckAnswersPage extends StatelessWidget {
   final List<Question> questions;
   final Map<int,dynamic> answers;
 
-  const CheckAnswersPage({Key key, @required this.questions, @required this.answers}) : super(key: key);
+  const CheckAnswersPage({Key? key, required this.questions, required this.answers}) : super(key: key);
 
   @override
   Widget build(BuildContext context){
@@ -39,7 +39,7 @@ class CheckAnswersPage extends StatelessWidget {
   }
   Widget _buildItem(BuildContext context, int index) {
     if(index == questions.length) {
-      return RaisedButton(
+      return ElevatedButton(
         child: Text("Done"),
         onPressed: (){
           Navigator.of(context).popUntil(ModalRoute.withName(Navigator.defaultRouteName));
@@ -54,7 +54,7 @@ class CheckAnswersPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(HtmlUnescape().convert(question.question), style: TextStyle(
+            Text(HtmlUnescape().convert(question.question!), style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.w500,
               fontSize: 16.0
@@ -69,7 +69,7 @@ class CheckAnswersPage extends StatelessWidget {
             correct ? Container(): Text.rich(TextSpan(
               children: [
                 TextSpan(text: "Answer: "),
-                TextSpan(text: HtmlUnescape().convert(question.correctAnswer) , style: TextStyle(
+                TextSpan(text: HtmlUnescape().convert(question.correctAnswer!) , style: TextStyle(
                   fontWeight: FontWeight.w500
                 ))
               ]
